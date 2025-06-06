@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🌙 Eid Mubarak 2025</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      font-family: 'Courier New', monospace;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #0f0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    h1 {
+      font-size: 4em;
+      color: #00ffcc;
+      text-shadow:
+        0 0 10px #00ffcc,
+        0 0 20px #00ffcc,
+        0 0 30px #00ffff;
+      animation: glow 2s infinite alternate;
+      margin-bottom: 10px;
+    }
+
+    h2, h3, h4 {
+      color: #ffffff;
+      font-size: 1.8em;
+      margin: 10px 0;
+      text-shadow:
+        0 0 5px #0f0,
+        0 0 10px #0f0;
+      animation: flicker 3s infinite;
+    }
+
+    h3 {
+      font-size: 1.3em;
+      color: #ffa;
+      text-shadow:
+        0 0 5px #ff0,
+        0 0 10px #ff0;
+    }
+
+    h4 {
+      font-size: 1em;
+      color: #00f7ff;
+      text-shadow:
+        0 0 5px #00f7ff,
+        0 0 15px #00f7ff;
+      margin-top: 20px;
+      animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow:
+          0 0 5px #00ffcc,
+          0 0 10px #00ffcc;
+      }
+      to {
+        text-shadow:
+          0 0 20px #00ffff,
+          0 0 30px #00ffff;
+      }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+      75% { opacity: 0.8; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Matrix Rain Background -->
+<canvas id="matrix"></canvas>
+
+<!-- Overlay Text -->
+<div class="overlay">
+  <h1>🌙 Eid Mubarak 2025 🌙</h1>
+  <h2>ঈদ উল আজহার শুভেচ্ছা!</h2>
+  <h3>আল্লাহ আপনার ও আপনার পরিবারের ঈদ আনন্দে পরিপূর্ণ করুন! 🌙🕌✨</h3>
+  <h3>May Allah bless your Eid-ul-Adha with happiness and peace!</h3>
+  <h4>Thank you – MD Tanvirul Islam</h4>
+</div>
+
+<!-- Matrix Rain Script -->
+<script>
+  const canvas = document.getElementById("matrix");
+  const ctx = canvas.getContext("2d");
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const letters = "ঈদমুবারক20250123456789EIDULADHA";
+  const fontSize = 16;
+  const columns = canvas.width / fontSize;
+  const drops = Array.from({ length: columns }).fill(1);
+
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#0f0";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = letters.charAt(Math.floor(Math.random() * letters.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(draw, 33);
+</script>
+
+<!-- Speech with Female Voice -->
+<script>
+  window.onload = function () {
+    const text = "ঈদ উল আজহার শুভেচ্ছা। আল্লাহ আপনার ও আপনার পরিবারের ঈদ আনন্দে পরিপূর্ণ করুন। ধন্যবাদ - এম ডি তানভিরুল ইসলাম।";
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.lang = 'bn-BD'; // Bengali (Bangladesh)
+
+    // Find a female voice if possible
+    const voices = speechSynthesis.getVoices();
+    const female = voices.find(v => v.lang.startsWith("bn") && v.name.toLowerCase().includes("female"));
+    if (female) {
+      msg.voice = female;
+    }
+
+    msg.pitch = 1.1;
+    msg.rate = 0.92;
+
+    // Allow some time to load voices
+    setTimeout(() => {
+      speechSynthesis.speak(msg);
+    }, 1000);
+  };
+</script>
+
+</body>
+</html>
